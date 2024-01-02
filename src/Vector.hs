@@ -1,5 +1,7 @@
 module Vector where
 
+import qualified Control.DeepSeq as Par
+
 data Vector3 a = Vector3
   { x :: a
   , y :: a
@@ -12,6 +14,10 @@ type Vec3 = Vector3 Float
 
 vec3 :: Float -> Float -> Float -> Vec3
 vec3 x y z = Vector3 x y z
+
+
+instance Num a => Par.NFData (Vector3 a) where
+  rnf v = v `seq` ()
 
 instance Functor Vector3 where
   fmap f (Vector3 x y z) = Vector3 (f x) (f y) (f z)
@@ -60,3 +66,7 @@ norm :: Vec3 -> Vec3
 norm (Vector3 x y z) =
   let mag = sqrt $ x*x + y*y + z*z
   in Vector3 (x/mag) (y/mag) (z/mag)
+
+reflect :: Vec3 -> Vec3 -> Vec3
+reflect v normal =
+  v - (2 * (dot v normal)) *^ normal

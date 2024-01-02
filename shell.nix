@@ -2,10 +2,9 @@ with import <nixpkgs> {};
 stdenv.mkDerivation {
   name = "Raytracer";
   buildInputs =
-    let haskellEnv = haskell.packages.ghc925.ghcWithPackages (pkgs: with pkgs; [
+    let haskellEnv = haskellPackages.ghc.withPackages (pkgs: with pkgs; [
+	  #aeson
           stack
-          bytestring
-          #haskell-language-server
         ]);
     in
       [haskellEnv];

@@ -7,8 +7,8 @@ import Data.Maybe (catMaybes)
 
 import qualified Core
 
-screenWidth = 1280 :: Int
-screenHeight = 720 :: Int
+screenWidth = 640 :: Int
+screenHeight = 360 :: Int
 
 main :: IO ()
 main = do
